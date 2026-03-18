@@ -23,6 +23,21 @@ export default function HomePage() {
                 Meet the Team
               </Link>
             </div>
+
+            <div className="footer-contact-tabs">
+              <Link href="/" className="footer-tab">
+                Facebook
+              </Link>
+              <Link href="/" className="footer-tab">
+                Email Contact
+              </Link>
+              <Link href="/" className="footer-tab">
+                Zalo
+              </Link>
+              <Link href="/" className="footer-tab">
+                X
+              </Link>
+            </div>
           </div>
 
           <div className="hero-card">
