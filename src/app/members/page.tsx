@@ -11,7 +11,7 @@ type Member = {
   name: string;
   role?: string;
   bio?: string;
-  photo?: unknown;
+  photo?: Record<string, unknown> | null;
   email?: string;
   phone?: string;
   office?: string;

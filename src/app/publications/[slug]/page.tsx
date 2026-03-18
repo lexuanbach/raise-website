@@ -4,6 +4,21 @@ import { publicationBySlugQuery } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
+type PublicationAuthor = {
+  name: string;
+  slug?: string | null;
+};
+
+type PublicationDetail = {
+  title: string;
+  authors?: PublicationAuthor[];
+  venue?: string;
+  year?: number;
+  abstract?: string;
+  paperUrl?: string;
+  codeUrl?: string;
+};
+
 export default async function PublicationDetailPage({
   params,
 }: {
@@ -11,7 +26,7 @@ export default async function PublicationDetailPage({
 }) {
   const { slug } = await params;
 
-  const pub = await client.fetch(publicationBySlugQuery, { slug });
+  const pub = await client.fetch<PublicationDetail | null>(publicationBySlugQuery, { slug });
 
   if (!pub) {
     return (
@@ -22,6 +37,8 @@ export default async function PublicationDetailPage({
       </main>
     );
   }
+
+  const authors = pub.authors ?? [];
 
   return (
     <main className="section">
@@ -34,16 +51,16 @@ export default async function PublicationDetailPage({
           <p className="article-kicker">Publication</p>
           <h1 className="article-title">{pub.title}</h1>
 
-          {pub.authors?.length > 0 && (
+          {authors.length > 0 && (
             <p className="article-lead">
-              {pub.authors.map((author: any, index: number) => (
+              {authors.map((author, index: number) => (
                 <span key={`${author.name}-${index}`}>
                   {author.slug ? (
                     <Link href={`/members/${author.slug}`}>{author.name}</Link>
                   ) : (
                     author.name
                   )}
-                  {index < pub.authors.length - 1 ? ", " : ""}
+                  {index < authors.length - 1 ? ", " : ""}
                 </span>
               ))}
             </p>

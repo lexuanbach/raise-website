@@ -21,7 +21,7 @@ export const ROLE_OPTIONS = [
   },
 ] as const;
 
-const ROLE_OPTION_MAP = new Map(
+const ROLE_OPTION_MAP = new Map<string, (typeof ROLE_OPTIONS)[number]>(
   ROLE_OPTIONS.map((role) => [role.value, role]),
 );
 

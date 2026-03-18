@@ -6,6 +6,33 @@ import { getRoleTitle } from "@/app/members/roles";
 
 export const revalidate = 60;
 
+type MemberPublication = {
+  _id: string;
+  title: string;
+  venue?: string;
+  year?: number;
+  paperUrl?: string;
+  codeUrl?: string;
+  slug?: string;
+};
+
+type MemberDetail = {
+  name: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+  office?: string;
+  googleScholar?: string;
+  dblp?: string;
+  orcid?: string;
+  github?: string;
+  website?: string;
+  linkedin?: string;
+  bio?: string;
+  photo?: Record<string, unknown> | null;
+  publications?: MemberPublication[];
+};
+
 export default async function MemberPage({
   params,
 }: {
@@ -13,7 +40,7 @@ export default async function MemberPage({
 }) {
   const { slug } = await params;
 
-  const member = await client.fetch(memberBySlugQuery, { slug });
+  const member = await client.fetch<MemberDetail | null>(memberBySlugQuery, { slug });
 
   if (!member) {
     return (
@@ -24,6 +51,8 @@ export default async function MemberPage({
       </main>
     );
   }
+
+  const publications = member.publications ?? [];
 
   return (
     <main className="section">
@@ -127,7 +156,7 @@ export default async function MemberPage({
           </div>
         </div>
 
-        {member.publications?.length > 0 && (
+        {publications.length > 0 && (
           <section style={{ marginTop: "2rem" }}>
             <p className="section-label">Research Output</p>
             <h2 className="section-title" style={{ fontSize: "1.8rem" }}>
@@ -135,7 +164,7 @@ export default async function MemberPage({
             </h2>
 
             <div className="card-grid">
-              {member.publications.map((pub: any) => (
+              {publications.map((pub) => (
                 <article className="info-card" key={pub._id}>
                   <h3>
                     {pub.slug ? (

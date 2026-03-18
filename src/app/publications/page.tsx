@@ -4,8 +4,24 @@ import Link from "next/link";
 
 export const revalidate = 60;
 
+type PublicationAuthor = {
+  name: string;
+  slug?: string | null;
+};
+
+type Publication = {
+  _id: string;
+  title: string;
+  authors?: PublicationAuthor[];
+  venue?: string;
+  year?: number;
+  paperUrl?: string;
+  codeUrl?: string;
+  slug?: string;
+};
+
 export default async function PublicationsPage() {
-  const pubs = await client.fetch(publicationsQuery);
+  const pubs = await client.fetch<Publication[]>(publicationsQuery);
 
   return (
     <main className="section">
@@ -17,47 +33,51 @@ export default async function PublicationsPage() {
         </p>
 
         <div className="card-grid">
-          {pubs.map((p: any) => (
-            <article className="info-card" key={p._id}>
-              <h3>
-                {p.slug ? (
-                  <Link href={`/publications/${p.slug}`}>{p.title}</Link>
-                ) : (
-                  p.title
+          {pubs.map((p) => {
+            const authors = p.authors ?? [];
+
+            return (
+              <article className="info-card" key={p._id}>
+                <h3>
+                  {p.slug ? (
+                    <Link href={`/publications/${p.slug}`}>{p.title}</Link>
+                  ) : (
+                    p.title
+                  )}
+                </h3>
+
+                {authors.length > 0 && (
+                  <p className="muted">
+                    {authors.map((author, index: number) => (
+                      <span key={`${author.name}-${index}`}>
+                        {author.slug ? (
+                          <Link href={`/members/${author.slug}`}>{author.name}</Link>
+                        ) : (
+                          author.name
+                        )}
+                        {index < authors.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </p>
                 )}
-              </h3>
 
-              {p.authors?.length > 0 && (
-                <p className="muted">
-                  {p.authors.map((author: any, index: number) => (
-                    <span key={`${author.name}-${index}`}>
-                      {author.slug ? (
-                        <Link href={`/members/${author.slug}`}>{author.name}</Link>
-                      ) : (
-                        author.name
-                      )}
-                      {index < p.authors.length - 1 ? ", " : ""}
-                    </span>
-                  ))}
-                </p>
-              )}
+                {(p.venue || p.year) && (
+                  <p className="muted">
+                    {p.venue || ""}
+                    {p.venue && p.year ? " " : ""}
+                    {p.year ? `(${p.year})` : ""}
+                  </p>
+                )}
 
-              {(p.venue || p.year) && (
-                <p className="muted">
-                  {p.venue || ""}
-                  {p.venue && p.year ? " " : ""}
-                  {p.year ? `(${p.year})` : ""}
-                </p>
-              )}
-
-              {(p.paperUrl || p.codeUrl) && (
-                <div className="publication-links">
-                  {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
-                  {p.codeUrl && <a href={p.codeUrl}>Code</a>}
-                </div>
-              )}
-            </article>
-          ))}
+                {(p.paperUrl || p.codeUrl) && (
+                  <div className="publication-links">
+                    {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
+                    {p.codeUrl && <a href={p.codeUrl}>Code</a>}
+                  </div>
+                )}
+              </article>
+            );
+          })}
         </div>
       </div>
     </main>

@@ -4,8 +4,16 @@ import Link from "next/link";
 
 export const revalidate = 60;
 
+type NewsItem = {
+  _id: string;
+  title: string;
+  excerpt?: string;
+  publishedAt?: string;
+  slug?: string;
+};
+
 export default async function NewsPage() {
-  const news = await client.fetch(newsQuery);
+  const news = await client.fetch<NewsItem[]>(newsQuery);
 
   return (
     <main className="section">
@@ -17,7 +25,7 @@ export default async function NewsPage() {
         </p>
 
         <div className="card-grid">
-          {news.map((item: any) => (
+          {news.map((item) => (
             <article className="info-card" key={item._id}>
               <h3>
                 {item.slug ? (

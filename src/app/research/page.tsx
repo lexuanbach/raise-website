@@ -4,8 +4,16 @@ import { researchQuery } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
+type ResearchDirection = {
+  _id: string;
+  title: string;
+  shortDescription?: string;
+  keywords?: string[];
+  slug?: string;
+};
+
 export default async function ResearchPage() {
-  const research = await client.fetch(researchQuery);
+  const research = await client.fetch<ResearchDirection[]>(researchQuery);
 
   return (
     <main className="section">
@@ -21,33 +29,35 @@ export default async function ResearchPage() {
         </p>
 
         <div className="card-grid">
-          {research.map((item: any) => (
-            <article className="info-card" key={item._id}>
+          {research.map((item) => {
+            const keywords = item.keywords ?? [];
 
-              <h3>
-                {item.slug ? (
-                  <Link href={`/research/${item.slug}`}>{item.title}</Link>
-                ) : (
-                  item.title
+            return (
+              <article className="info-card" key={item._id}>
+                <h3>
+                  {item.slug ? (
+                    <Link href={`/research/${item.slug}`}>{item.title}</Link>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
+
+                {item.shortDescription && (
+                  <p className="muted">{item.shortDescription}</p>
                 )}
-              </h3>
 
-              {item.shortDescription && (
-                <p className="muted">{item.shortDescription}</p>
-              )}
-
-              {item.keywords?.length > 0 && (
-                <div className="tag-row">
-                  {item.keywords.map((k: string, i: number) => (
-                    <span key={i} className="tag">
-                      {k}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-            </article>
-          ))}
+                {keywords.length > 0 && (
+                  <div className="tag-row">
+                    {keywords.map((keyword, index) => (
+                      <span key={index} className="tag">
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            );
+          })}
         </div>
 
       </div>

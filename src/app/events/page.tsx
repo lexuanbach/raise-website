@@ -4,17 +4,26 @@ import { eventsQuery } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
+type Event = {
+  _id: string;
+  title: string;
+  location?: string;
+  startDate?: string;
+  summary?: string;
+  slug?: string;
+};
+
 export default async function EventsPage() {
-  const events = await client.fetch(eventsQuery);
+  const events = await client.fetch<Event[]>(eventsQuery);
 
   const now = new Date();
 
-  const upcomingEvents = events.filter((event: any) => {
+  const upcomingEvents = events.filter((event) => {
     if (!event.startDate) return false;
     return new Date(event.startDate) >= now;
   });
 
-  const pastEvents = events.filter((event: any) => {
+  const pastEvents = events.filter((event) => {
     if (!event.startDate) return true;
     return new Date(event.startDate) < now;
   });
@@ -36,7 +45,7 @@ export default async function EventsPage() {
             <p className="muted">No upcoming events at the moment.</p>
           ) : (
             <div className="card-grid">
-              {upcomingEvents.map((event: any) => (
+              {upcomingEvents.map((event) => (
                 <article
                   key={event._id}
                   className="info-card event-card event-upcoming"
@@ -79,7 +88,7 @@ export default async function EventsPage() {
             <p className="muted">No past events yet.</p>
           ) : (
             <div className="card-grid">
-              {pastEvents.map((event: any) => (
+              {pastEvents.map((event) => (
                 <article
                   key={event._id}
                   className="info-card event-card event-past"
