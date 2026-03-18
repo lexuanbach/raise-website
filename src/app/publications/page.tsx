@@ -73,11 +73,12 @@ export default async function PublicationsPage() {
               <h2 className="section-subtitle">{year}</h2>
 
               <div className="publication-list">
-                {publications.map((p) => {
+                {publications.map((p, index) => {
                   const authors = p.authors ?? [];
 
                   return (
                     <article className="info-card publication-list-item" key={p._id}>
+                      <div className="publication-list-number">{index + 1}.</div>
                       <h3>
                         {p.slug ? (
                           <Link href={`/publications/${p.slug}`}>{p.title}</Link>

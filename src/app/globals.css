@@ -306,6 +306,24 @@ a:hover {
 
 .publication-list-item {
   width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem 1rem;
+  align-items: start;
+}
+
+.publication-list-item h3,
+.publication-list-item p,
+.publication-list-item .publication-links {
+  grid-column: 2;
+}
+
+.publication-list-number {
+  grid-row: 1 / span 3;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .publication-year-sections {

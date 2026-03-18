@@ -2,6 +2,8 @@ import { client } from "@/sanity/lib/client";
 import { eventsQuery, newsQuery, publicationsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 type NewsItem = {
   _id: string;
   title: string;
