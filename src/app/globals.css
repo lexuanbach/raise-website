@@ -356,6 +356,19 @@ a:hover {
   line-height: 1.6;
 }
 
+.publication-inline-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.publication-inline-number {
+  color: var(--muted);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
 .publication-year-sections {
   margin-top: 1.75rem;
   display: grid;
