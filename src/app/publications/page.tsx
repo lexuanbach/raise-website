@@ -102,10 +102,9 @@ export default async function PublicationsPage() {
                       )}
 
                       {(p.venue || p.year) && (
-                        <p className="muted">
-                          {p.venue || ""}
-                          {p.venue && p.year ? " " : ""}
-                          {p.year ? `(${p.year})` : ""}
+                        <p className="publication-meta">
+                          {p.venue && <span className="publication-venue">{p.venue}</span>}
+                          {p.year ? <span className="publication-year">({p.year})</span> : null}
                         </p>
                       )}
 

@@ -44,7 +44,7 @@ export default async function EventsPage() {
           {upcomingEvents.length === 0 ? (
             <p className="muted">No upcoming events at the moment.</p>
           ) : (
-            <div className="card-grid">
+            <div className="event-list">
               {upcomingEvents.map((event) => (
                 <article
                   key={event._id}
@@ -87,7 +87,7 @@ export default async function EventsPage() {
           {pastEvents.length === 0 ? (
             <p className="muted">No past events yet.</p>
           ) : (
-            <div className="card-grid">
+            <div className="event-list">
               {pastEvents.map((event) => (
                 <article
                   key={event._id}

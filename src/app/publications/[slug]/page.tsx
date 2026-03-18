@@ -72,10 +72,14 @@ export default async function PublicationDetailPage({
 
           <div className="metadata-grid">
             <div className="metadata-label">Venue</div>
-            <div className="metadata-value">{pub.venue || "—"}</div>
+            <div className="metadata-value">
+              {pub.venue ? <span className="publication-venue">{pub.venue}</span> : "—"}
+            </div>
 
             <div className="metadata-label">Year</div>
-            <div className="metadata-value">{pub.year || "—"}</div>
+            <div className="metadata-value">
+              {pub.year ? <span className="publication-year">({pub.year})</span> : "—"}
+            </div>
           </div>
 
           <div className="link-row">

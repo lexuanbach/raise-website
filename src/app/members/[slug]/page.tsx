@@ -174,9 +174,12 @@ export default async function MemberPage({
                     )}
                   </h3>
 
-                  <p className="muted">
-                    {pub.venue} {pub.year ? `(${pub.year})` : ""}
-                  </p>
+                  {(pub.venue || pub.year) && (
+                    <p className="publication-meta">
+                      {pub.venue && <span className="publication-venue">{pub.venue}</span>}
+                      {pub.year ? <span className="publication-year">({pub.year})</span> : null}
+                    </p>
+                  )}
 
                   <div className="publication-links">
                     {pub.paperUrl && <a href={pub.paperUrl}>Paper</a>}
