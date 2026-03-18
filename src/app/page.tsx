@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { newsQuery } from "@/sanity/lib/queries";
+import { eventsQuery, newsQuery, publicationsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
 
 type NewsItem = {
@@ -10,13 +10,39 @@ type NewsItem = {
   slug?: string;
 };
 
+type EventItem = {
+  _id: string;
+  title: string;
+  startDate?: string;
+  slug?: string;
+};
+
+type PublicationItem = {
+  _id: string;
+  title: string;
+  year?: number;
+  slug?: string;
+};
+
 export default async function HomePage() {
-  const news = await client.fetch<NewsItem[]>(newsQuery);
+  const [news, events, publications] = await Promise.all([
+    client.fetch<NewsItem[]>(newsQuery),
+    client.fetch<EventItem[]>(eventsQuery),
+    client.fetch<PublicationItem[]>(publicationsQuery),
+  ]);
   const threeDaysAgo = new Date();
   threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+  const now = new Date();
+  const currentYear = now.getFullYear();
 
   const latestNews = news
     .filter((item) => item.publishedAt && new Date(item.publishedAt) >= threeDaysAgo)
+    .slice(0, 3);
+  const upcomingEvents = events
+    .filter((event) => event.startDate && new Date(event.startDate) >= now)
+    .slice(0, 3);
+  const latestPublications = publications
+    .filter((publication) => publication.year === currentYear)
     .slice(0, 3);
 
   return (
@@ -81,14 +107,44 @@ export default async function HomePage() {
 
           <div className="card-grid">
             <div className="info-card">
-              <h3>Research</h3>
-              <p>Core directions, themes, and ongoing projects.</p>
-              <Link href="/research">View research</Link>
+              <h3>Events</h3>
+              <p>Upcoming talks, seminars, workshops, and community activities.</p>
+              {upcomingEvents.length > 0 ? (
+                <div className="homepage-news-list">
+                  {upcomingEvents.map((event) => (
+                    <Link
+                      key={event._id}
+                      href={event.slug ? `/events/${event.slug}` : "/events"}
+                      className="homepage-news-item"
+                    >
+                      {event.title}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="muted">No upcoming events right now.</p>
+              )}
+              <Link href="/events">View events</Link>
             </div>
 
             <div className="info-card">
               <h3>Publications</h3>
-              <p>Papers, preprints, venues, and artifacts.</p>
+              <p>Papers, preprints, venues, and artifacts from {currentYear}.</p>
+              {latestPublications.length > 0 ? (
+                <div className="homepage-news-list">
+                  {latestPublications.map((publication) => (
+                    <Link
+                      key={publication._id}
+                      href={publication.slug ? `/publications/${publication.slug}` : "/publications"}
+                      className="homepage-news-item"
+                    >
+                      {publication.title}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="muted">No publications from {currentYear} yet.</p>
+              )}
               <Link href="/publications">View publications</Link>
             </div>
 
