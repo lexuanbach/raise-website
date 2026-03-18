@@ -23,6 +23,28 @@ type Publication = {
 export default async function PublicationsPage() {
   const pubs = await client.fetch<Publication[]>(publicationsQuery);
   const sortedPubs = [...pubs].sort((left, right) => (right.year ?? 0) - (left.year ?? 0));
+  const publicationsByYear = sortedPubs.reduce<Record<string, Publication[]>>((groups, publication) => {
+    const yearKey = publication.year ? publication.year.toString() : "Other";
+
+    if (!groups[yearKey]) {
+      groups[yearKey] = [];
+    }
+
+    groups[yearKey].push(publication);
+    return groups;
+  }, {});
+
+  const yearSections = Object.entries(publicationsByYear).sort(([leftYear], [rightYear]) => {
+    if (leftYear === "Other") {
+      return 1;
+    }
+
+    if (rightYear === "Other") {
+      return -1;
+    }
+
+    return Number(rightYear) - Number(leftYear);
+  });
 
   return (
     <main className="section">
@@ -33,52 +55,60 @@ export default async function PublicationsPage() {
           Papers, preprints, and research artifacts from the RAISE group.
         </p>
 
-        <div className="publication-list">
-          {sortedPubs.map((p) => {
-            const authors = p.authors ?? [];
+        <div className="publication-year-sections">
+          {yearSections.map(([year, publications]) => (
+            <section key={year} className="publication-year-section">
+              <h2 className="section-subtitle">{year}</h2>
 
-            return (
-              <article className="info-card publication-list-item" key={p._id}>
-                <h3>
-                  {p.slug ? (
-                    <Link href={`/publications/${p.slug}`}>{p.title}</Link>
-                  ) : (
-                    p.title
-                  )}
-                </h3>
+              <div className="publication-list">
+                {publications.map((p) => {
+                  const authors = p.authors ?? [];
 
-                {authors.length > 0 && (
-                  <p className="muted">
-                    {authors.map((author, index: number) => (
-                      <span key={`${author.name}-${index}`}>
-                        {author.slug ? (
-                          <Link href={`/members/${author.slug}`}>{author.name}</Link>
+                  return (
+                    <article className="info-card publication-list-item" key={p._id}>
+                      <h3>
+                        {p.slug ? (
+                          <Link href={`/publications/${p.slug}`}>{p.title}</Link>
                         ) : (
-                          author.name
+                          p.title
                         )}
-                        {index < authors.length - 1 ? ", " : ""}
-                      </span>
-                    ))}
-                  </p>
-                )}
+                      </h3>
 
-                {(p.venue || p.year) && (
-                  <p className="muted">
-                    {p.venue || ""}
-                    {p.venue && p.year ? " " : ""}
-                    {p.year ? `(${p.year})` : ""}
-                  </p>
-                )}
+                      {authors.length > 0 && (
+                        <p className="muted">
+                          {authors.map((author, index: number) => (
+                            <span key={`${author.name}-${index}`}>
+                              {author.slug ? (
+                                <Link href={`/members/${author.slug}`}>{author.name}</Link>
+                              ) : (
+                                author.name
+                              )}
+                              {index < authors.length - 1 ? ", " : ""}
+                            </span>
+                          ))}
+                        </p>
+                      )}
 
-                {(p.paperUrl || p.codeUrl) && (
-                  <div className="publication-links">
-                    {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
-                    {p.codeUrl && <a href={p.codeUrl}>Code</a>}
-                  </div>
-                )}
-              </article>
-            );
-          })}
+                      {(p.venue || p.year) && (
+                        <p className="muted">
+                          {p.venue || ""}
+                          {p.venue && p.year ? " " : ""}
+                          {p.year ? `(${p.year})` : ""}
+                        </p>
+                      )}
+
+                      {(p.paperUrl || p.codeUrl) && (
+                        <div className="publication-links">
+                          {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
+                          {p.codeUrl && <a href={p.codeUrl}>Code</a>}
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
         </div>
       </div>
     </main>

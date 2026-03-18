@@ -163,9 +163,9 @@ export default async function MemberPage({
               Publications
             </h2>
 
-            <div className="card-grid">
+            <div className="publication-list">
               {publications.map((pub) => (
-                <article className="info-card" key={pub._id}>
+                <article className="info-card publication-list-item" key={pub._id}>
                   <h3>
                     {pub.slug ? (
                       <Link href={`/publications/${pub.slug}`}>{pub.title}</Link>

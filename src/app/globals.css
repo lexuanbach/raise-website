@@ -177,6 +177,7 @@ a:hover {
 }
 
 .section-label {
+  margin: 0;
   color: var(--primary-dark);
   font-size: 0.84rem;
   font-weight: 700;
@@ -190,6 +191,7 @@ a:hover {
 }
 
 .section-text {
+  margin: 0;
   max-width: 760px;
   color: var(--muted);
 }
@@ -288,6 +290,17 @@ a:hover {
   width: 100%;
 }
 
+.publication-year-sections {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.publication-year-section {
+  display: grid;
+  gap: 1rem;
+}
+
 @media (max-width: 900px) {
   .hero-grid,
   .card-grid {
@@ -341,6 +354,7 @@ a:hover {
 .member-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   width: 12rem;
   max-width: 12rem;
   min-height: 2.4rem;
@@ -356,6 +370,7 @@ a:hover {
 .member-link-text {
   display: block;
   width: 100%;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -396,6 +411,10 @@ a:hover {
 .member-info {
   flex: 1;
   min-width: 0;
+}
+
+.member-info h3 {
+  margin: 0 0 0.5rem;
 }
 
 .member-role {
