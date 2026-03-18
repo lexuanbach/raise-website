@@ -338,13 +338,18 @@ a:hover {
 }
 
 .member-card {
-  display: flex;
+  display: grid;
   gap: 1rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1rem;
   box-shadow: var(--shadow);
+}
+
+.member-card-main {
+  display: flex;
+  gap: 1rem;
 }
 
 .member-photo {
@@ -357,6 +362,11 @@ a:hover {
 
 .member-info {
   flex: 1;
+  min-width: 0;
+}
+
+.member-role {
+  margin-bottom: 0.5rem;
 }
 
 .member-sections {
@@ -614,6 +624,14 @@ a:hover {
   color: var(--muted);
 }
 
+.member-contact p {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0.2rem 0;
+  min-width: 0;
+}
+
 .member-contact a {
   text-decoration: none;
   color: var(--link);
@@ -631,6 +649,11 @@ a:hover {
 }
 
 .member-links a{
+  display: inline-block;
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size:0.9rem;
   text-decoration:none;
   color:#2563eb;
@@ -640,6 +663,17 @@ a:hover {
   text-decoration:underline;
 }
 
-.member-contact p {
-  margin: 0.2rem 0;
+.member-tag-text {
+  display: inline-block;
+  max-width: 13rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.member-bio {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
 }
