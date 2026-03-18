@@ -176,8 +176,10 @@ export default async function MemberPage({
 
                   {(pub.venue || pub.year) && (
                     <p className="publication-meta">
-                      {pub.venue && <span className="publication-venue">{pub.venue}</span>}
-                      {pub.year ? <span className="publication-year">({pub.year})</span> : null}
+                      <span className="publication-venue">
+                        {pub.venue || "Publication"}
+                        {pub.year ? ` (${pub.year})` : ""}
+                      </span>
                     </p>
                   )}
 

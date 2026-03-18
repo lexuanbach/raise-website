@@ -115,7 +115,7 @@ export default async function HomePage() {
                     <Link
                       key={event._id}
                       href={event.slug ? `/events/${event.slug}` : "/events"}
-                      className="homepage-news-item"
+                      className="homepage-news-item homepage-news-item-events"
                     >
                       {event.title}
                     </Link>
@@ -136,7 +136,7 @@ export default async function HomePage() {
                     <Link
                       key={publication._id}
                       href={publication.slug ? `/publications/${publication.slug}` : "/publications"}
-                      className="homepage-news-item"
+                      className="homepage-news-item homepage-news-item-publications"
                     >
                       {publication.title}
                     </Link>
@@ -157,7 +157,7 @@ export default async function HomePage() {
                     <Link
                       key={item._id}
                       href={item.slug ? `/news/${item.slug}` : "/news"}
-                      className="homepage-news-item"
+                      className="homepage-news-item homepage-news-item-news"
                     >
                       {item.title}
                     </Link>

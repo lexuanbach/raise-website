@@ -298,11 +298,6 @@ a:hover {
   line-height: 1.5;
 }
 
-.publication-year {
-  color: var(--muted);
-  font-weight: 600;
-}
-
 .publication-list {
   margin-top: 1.75rem;
   display: grid;
@@ -374,15 +369,38 @@ a:hover {
 }
 
 .homepage-news-item {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
   color: var(--text);
   font-weight: 500;
   line-height: 1.5;
+  text-decoration: none;
 }
 
 .homepage-news-item:hover {
   color: var(--primary);
   text-decoration: underline;
+}
+
+.homepage-news-item-events {
+  background: #e8f7f1;
+  border-color: #b7e3d0;
+  color: #0f5c54;
+}
+
+.homepage-news-item-publications {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #3730a3;
+}
+
+.homepage-news-item-news {
+  background: #fff4e5;
+  border-color: #f7d8a8;
+  color: #9a3412;
 }
 
 @media (max-width: 900px) {
