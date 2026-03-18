@@ -364,6 +364,10 @@ a:hover {
   gap: 1rem;
 }
 
+.member-card-row {
+  width: 100%;
+}
+
 .member-photo {
   width: 96px;
   height: 96px;
