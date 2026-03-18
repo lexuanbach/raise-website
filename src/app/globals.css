@@ -416,6 +416,7 @@ a:hover {
   padding: 0.55rem 0.8rem;
   border-radius: 999px;
   border: 1px solid transparent;
+  box-sizing: border-box;
   color: var(--text);
   font-weight: 500;
   line-height: 1.5;
@@ -437,6 +438,9 @@ a:hover {
 }
 
 .homepage-news-item-publications {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   background: #eef2ff;
   border-color: #c7d2fe;
   color: #3730a3;
