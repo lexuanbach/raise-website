@@ -388,7 +388,7 @@ a:hover {
 
 .homepage-news-item {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.55rem 0.8rem;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -396,6 +396,9 @@ a:hover {
   font-weight: 500;
   line-height: 1.5;
   text-decoration: none;
+  min-height: 3.1rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .homepage-news-item:hover {
