@@ -1,6 +1,24 @@
+import { client } from "@/sanity/lib/client";
+import { newsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
 
-export default function HomePage() {
+type NewsItem = {
+  _id: string;
+  title: string;
+  excerpt?: string;
+  publishedAt?: string;
+  slug?: string;
+};
+
+export default async function HomePage() {
+  const news = await client.fetch<NewsItem[]>(newsQuery);
+  const threeDaysAgo = new Date();
+  threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+  const latestNews = news
+    .filter((item) => item.publishedAt && new Date(item.publishedAt) >= threeDaysAgo)
+    .slice(0, 3);
+
   return (
     <main>
       <section className="hero-section">
@@ -77,6 +95,21 @@ export default function HomePage() {
             <div className="info-card">
               <h3>News</h3>
               <p>Announcements, seminars, and recent updates.</p>
+              {latestNews.length > 0 ? (
+                <div className="homepage-news-list">
+                  {latestNews.map((item) => (
+                    <Link
+                      key={item._id}
+                      href={item.slug ? `/news/${item.slug}` : "/news"}
+                      className="homepage-news-item"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="muted">No news from the last 3 days.</p>
+              )}
               <Link href="/news">View news</Link>
             </div>
           </div>

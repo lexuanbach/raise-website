@@ -368,6 +368,23 @@ a:hover {
   margin: 0;
 }
 
+.homepage-news-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.homepage-news-item {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.homepage-news-item:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 @media (max-width: 900px) {
   .card-grid {
     grid-template-columns: 1fr;
