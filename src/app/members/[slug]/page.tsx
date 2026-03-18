@@ -2,6 +2,7 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { memberBySlugQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { getRoleTitle } from "@/app/members/roles";
 
 export const revalidate = 60;
 
@@ -51,7 +52,7 @@ export default async function MemberPage({
 
             {member.role && (
               <p className="muted" style={{ marginBottom: "0.75rem" }}>
-                {member.role}
+                {getRoleTitle(member.role)}
               </p>
             )}
 

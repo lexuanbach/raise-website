@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { membersQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { getRoleSection, getRoleTitle } from "@/app/members/roles";
 import Link from "next/link";
 
 export const revalidate = 60;
@@ -50,42 +51,6 @@ const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
   {},
 );
 
-function getRoleSection(role?: string) {
-  const value = role?.toLowerCase().trim() ?? "";
-
-  if (
-    value.includes("lab head") ||
-    value.includes("head") ||
-    value.includes("pi") ||
-    value.includes("director") ||
-    value.includes("principal investigator")
-  ) {
-    return "Lab Head";
-  }
-
-  if (
-    value.includes("student") ||
-    value.includes("phd") ||
-    value.includes("master") ||
-    value.includes("undergraduate") ||
-    value.includes("undergrad")
-  ) {
-    return "Students";
-  }
-
-  if (
-    value.includes("collaborator") ||
-    value.includes("affiliate") ||
-    value.includes("partner") ||
-    value.includes("visitor") ||
-    value.includes("adjunct")
-  ) {
-    return "Collaborators";
-  }
-
-  return "Core Members";
-}
-
 function MemberCard({ member }: { member: Member }) {
   return (
     <article className="member-card" key={member._id}>
@@ -114,7 +79,7 @@ function MemberCard({ member }: { member: Member }) {
             )}
           </h3>
 
-          <p className="muted member-role">{member.role}</p>
+          <p className="muted member-role">{getRoleTitle(member.role)}</p>
 
           <div className="member-contact">
             {member.email && (
