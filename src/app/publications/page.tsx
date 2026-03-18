@@ -113,8 +113,16 @@ export default async function PublicationsPage() {
 
                       {(p.paperUrl || p.codeUrl) && (
                         <div className="publication-links">
-                          {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
-                          {p.codeUrl && <a href={p.codeUrl}>Code</a>}
+                          {p.paperUrl && (
+                            <a href={p.paperUrl} className="publication-link-primary">
+                              Paper
+                            </a>
+                          )}
+                          {p.codeUrl && (
+                            <a href={p.codeUrl} className="publication-link-secondary">
+                              Code
+                            </a>
+                          )}
                         </div>
                       )}
                     </article>

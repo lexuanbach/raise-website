@@ -131,7 +131,7 @@ export default async function HomePage() {
 
             <div className="info-card">
               <h3>Publications</h3>
-              <p>Papers, preprints, venues, and artifacts from {currentYear}.</p>
+              <p>Latest publications.</p>
               {latestPublications.length > 0 ? (
                 <div className="homepage-news-list">
                   {latestPublications.map((publication) => (

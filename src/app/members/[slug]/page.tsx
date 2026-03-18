@@ -184,8 +184,16 @@ export default async function MemberPage({
                   )}
 
                   <div className="publication-links">
-                    {pub.paperUrl && <a href={pub.paperUrl}>Paper</a>}
-                    {pub.codeUrl && <a href={pub.codeUrl}>Code</a>}
+                    {pub.paperUrl && (
+                      <a href={pub.paperUrl} className="publication-link-primary">
+                        Paper
+                      </a>
+                    )}
+                    {pub.codeUrl && (
+                      <a href={pub.codeUrl} className="publication-link-secondary">
+                        Code
+                      </a>
+                    )}
                   </div>
                 </article>
               ))}
