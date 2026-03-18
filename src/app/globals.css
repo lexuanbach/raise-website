@@ -376,12 +376,12 @@ a:hover {
 
 .member-link-shell {
   display: inline-flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   width: 12rem;
   max-width: 12rem;
   min-height: 2.4rem;
-  padding: 0.1rem 0.8rem 0.8rem;
+  padding: 0 0.8rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface-soft);
@@ -392,6 +392,7 @@ a:hover {
 
 .member-link {
   display: inline-flex;
+  align-items: center;
   min-width: 0;
   flex: 1;
   color: var(--text);
@@ -777,43 +778,10 @@ a:hover {
   background: var(--surface-soft);
   color: var(--muted);
   line-height: 1.7;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.75rem;
+  overflow-y: auto;
 }
 
 .member-bio-text {
   margin: 0;
-}
-
-.member-bio-text-clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-  overflow: hidden;
-}
-
-.member-bio-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.member-bio-more {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.5rem;
-  height: 2.25rem;
-  padding: 0 0.85rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.member-bio-more:hover {
-  text-decoration: underline;
+  padding-right: 0.25rem;
 }

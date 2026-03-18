@@ -51,13 +51,7 @@ const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
   {},
 );
 
-function isLongBio(bio?: string, threshold = 220) {
-  return Boolean(bio && bio.trim().length > threshold);
-}
-
 function MemberCard({ member }: { member: Member }) {
-  const hasLongBio = isLongBio(member.bio);
-
   return (
     <article className="member-card" key={member._id}>
       <div className="member-card-main">
@@ -134,14 +128,7 @@ function MemberCard({ member }: { member: Member }) {
 
       {member.bio && (
         <div className="member-bio">
-          <p className="member-bio-text member-bio-text-clamp">{member.bio}</p>
-          {hasLongBio && member.slug && (
-            <div className="member-bio-footer">
-              <Link href={`/members/${member.slug}`} className="member-bio-more">
-                ...
-              </Link>
-            </div>
-          )}
+          <p className="member-bio-text">{member.bio}</p>
         </div>
       )}
     </article>
