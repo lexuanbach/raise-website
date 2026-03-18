@@ -160,7 +160,7 @@ export default async function MemberPage({
           <section style={{ marginTop: "2rem" }}>
             <p className="section-label">Research Output</p>
             <h2 className="section-title" style={{ fontSize: "1.8rem" }}>
-              Publications
+              Selected Publications
             </h2>
 
             <div className="publication-list">
