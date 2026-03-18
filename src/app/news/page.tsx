@@ -34,7 +34,15 @@ export default async function NewsPage() {
                   item.title
                 )}
               </h3>
-              <p className="muted">{item.publishedAt}</p>
+              <p className="muted">
+                {item.publishedAt
+                  ? new Date(item.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}
+              </p>
               <p>{item.excerpt}</p>
             </article>
           ))}
