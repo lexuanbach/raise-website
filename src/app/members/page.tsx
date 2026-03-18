@@ -51,7 +51,33 @@ const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
   {},
 );
 
+function getBioPreview(bio?: string, maxLength = 280) {
+  if (!bio) {
+    return {
+      text: "",
+      truncated: false,
+    };
+  }
+
+  if (bio.length <= maxLength) {
+    return {
+      text: bio,
+      truncated: false,
+    };
+  }
+
+  const shortened = bio.slice(0, maxLength).trimEnd();
+  const lastSpaceIndex = shortened.lastIndexOf(" ");
+
+  return {
+    text: (lastSpaceIndex > 0 ? shortened.slice(0, lastSpaceIndex) : shortened).trimEnd(),
+    truncated: true,
+  };
+}
+
 function MemberCard({ member }: { member: Member }) {
+  const bioPreview = getBioPreview(member.bio);
+
   return (
     <article className="member-card" key={member._id}>
       <div className="member-card-main">
@@ -126,7 +152,18 @@ function MemberCard({ member }: { member: Member }) {
         </div>
       )}
 
-      {member.bio && <p className="member-bio member-bio-clamp">{member.bio}</p>}
+      {member.bio && (
+        <div className="member-bio">
+          <p className="member-bio-text">{bioPreview.text}</p>
+          {bioPreview.truncated && member.slug && (
+            <div className="member-bio-footer">
+              <Link href={`/members/${member.slug}`} className="member-bio-more">
+                ...
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
     </article>
   );
 }
