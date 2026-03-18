@@ -75,7 +75,7 @@ export default async function MemberPage({
             />
           )}
 
-          <div>
+          <div className="member-profile-details">
             <p className="section-label">Member</p>
             <h1 className="section-title">{member.name}</h1>
 
@@ -147,13 +147,13 @@ export default async function MemberPage({
                 )}
               </div>
             )}
-
-            {member.bio && (
-              <div className="detail-card" style={{ marginTop: "1rem" }}>
-                <p>{member.bio}</p>
-              </div>
-            )}
           </div>
+
+          {member.bio && (
+            <div className="detail-card member-profile-bio">
+              <p>{member.bio}</p>
+            </div>
+          )}
         </div>
 
         {publications.length > 0 && (
