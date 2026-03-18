@@ -51,14 +51,7 @@ export default async function PublicationsPage() {
               )}
 
               {(p.paperUrl || p.codeUrl) && (
-                <div
-                  style={{
-                    marginTop: "0.75rem",
-                    display: "flex",
-                    gap: "1rem",
-                    flexWrap: "wrap",
-                  }}
-                >
+                <div className="publication-links">
                   {p.paperUrl && <a href={p.paperUrl}>Paper</a>}
                   {p.codeUrl && <a href={p.codeUrl}>Code</a>}
                 </div>

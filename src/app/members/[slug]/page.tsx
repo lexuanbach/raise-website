@@ -148,14 +148,7 @@ export default async function MemberPage({
                     {pub.venue} {pub.year ? `(${pub.year})` : ""}
                   </p>
 
-                  <div
-                    style={{
-                      marginTop: "0.75rem",
-                      display: "flex",
-                      gap: "1rem",
-                      flexWrap: "wrap",
-                    }}
-                  >
+                  <div className="publication-links">
                     {pub.paperUrl && <a href={pub.paperUrl}>Paper</a>}
                     {pub.codeUrl && <a href={pub.codeUrl}>Code</a>}
                   </div>

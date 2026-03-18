@@ -236,11 +236,46 @@ a:hover {
   color: var(--muted);
 }
 
+.footer-contact-tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.footer-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.footer-tab:hover {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
 .footer-links {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: start;
+}
+
+.publication-links {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 900px) {
@@ -336,7 +371,10 @@ a:hover {
 
 .section-subtitle {
   margin: 0;
-  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #0f766e;
 }
 
 .narrow {

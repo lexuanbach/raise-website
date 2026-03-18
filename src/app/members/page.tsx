@@ -25,22 +25,30 @@ type Member = {
 
 const ROLE_SECTIONS = [
   {
-    key: "lab-head",
+    key: "Lab Head",
     title: "Lab Head",
   },
   {
-    key: "core-member",
+    key: "Core Members",
     title: "Core Members",
   },
   {
-    key: "student",
+    key: "Students",
     title: "Students",
   },
   {
-    key: "collaborator",
+    key: "Collaborators",
     title: "Collaborators",
   },
 ] as const;
+
+const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
+  (order, section, index) => {
+    order[section.key] = index;
+    return order;
+  },
+  {},
+);
 
 function getRoleSection(role?: string) {
   const value = role?.toLowerCase().trim() ?? "";
@@ -52,7 +60,7 @@ function getRoleSection(role?: string) {
     value.includes("director") ||
     value.includes("principal investigator")
   ) {
-    return "lab-head";
+    return "Lab Head";
   }
 
   if (
@@ -62,7 +70,7 @@ function getRoleSection(role?: string) {
     value.includes("undergraduate") ||
     value.includes("undergrad")
   ) {
-    return "student";
+    return "Students";
   }
 
   if (
@@ -72,10 +80,10 @@ function getRoleSection(role?: string) {
     value.includes("visitor") ||
     value.includes("adjunct")
   ) {
-    return "collaborator";
+    return "Collaborators";
   }
 
-  return "core-member";
+  return "Core Members";
 }
 
 function MemberCard({ member }: { member: Member }) {
@@ -153,9 +161,20 @@ function MemberCard({ member }: { member: Member }) {
 
 export default async function MembersPage() {
   const members = await client.fetch<Member[]>(membersQuery);
+  const sortedMembers = [...members].sort((left, right) => {
+    const leftSection = getRoleSection(left.role);
+    const rightSection = getRoleSection(right.role);
+
+    if (leftSection !== rightSection) {
+      return ROLE_SECTION_ORDER[leftSection] - ROLE_SECTION_ORDER[rightSection];
+    }
+
+    return left.name.localeCompare(right.name);
+  });
+
   const groupedMembers = ROLE_SECTIONS.map((section) => ({
     ...section,
-    members: members.filter((member) => getRoleSection(member.role) === section.key),
+    members: sortedMembers.filter((member) => getRoleSection(member.role) === section.key),
   })).filter((section) => section.members.length > 0);
 
   return (

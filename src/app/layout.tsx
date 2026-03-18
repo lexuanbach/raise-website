@@ -47,6 +47,12 @@ export default function RootLayout({
             <div>
               <strong>RAISE Research Group</strong>
               <p>Reasoning in Artificial Intelligence and Software Engineering</p>
+              <div className="footer-contact-tabs">
+                <Link href="/" className="footer-tab">Email</Link>
+                <Link href="/" className="footer-tab">Facebook</Link>
+                <Link href="/" className="footer-tab">X</Link>
+                <Link href="/" className="footer-tab">Zalo</Link>
+              </div>
             </div>
             <div className="footer-links">
               <Link href="/members">Members</Link>
