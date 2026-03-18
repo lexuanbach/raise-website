@@ -51,23 +51,7 @@ const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
   {},
 );
 
-function getMemberTagParts(name: string, maxLength = 14) {
-  if (name.length <= maxLength) {
-    return {
-      text: name,
-      truncated: false,
-    };
-  }
-
-  return {
-    text: `${name.slice(0, maxLength).trimEnd()}`,
-    truncated: true,
-  };
-}
-
 function MemberCard({ member }: { member: Member }) {
-  const memberTag = getMemberTagParts(member.name);
-
   return (
     <article className="member-card" key={member._id}>
       <div className="member-card-main">
@@ -87,32 +71,10 @@ function MemberCard({ member }: { member: Member }) {
         <div className="member-info">
           <h3>
             {member.slug ? (
-              <span
-                className={
-                  memberTag.truncated
-                    ? "member-link-shell member-link-shell-truncated"
-                    : "member-link-shell"
-                }
-              >
+              <span className="member-link-shell">
                 <Link href={`/members/${member.slug}`} className="member-link">
-                  <span className="member-link-text">{memberTag.text}</span>
+                  <span className="member-link-text">{member.name}</span>
                 </Link>
-                {memberTag.truncated &&
-                  (member.website ? (
-                    <a
-                      href={member.website}
-                      className="member-link-ellipsis"
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`Visit ${member.name}'s website`}
-                    >
-                      ...
-                    </a>
-                  ) : (
-                    <span className="member-link-ellipsis" aria-hidden="true">
-                      ...
-                    </span>
-                  ))}
               </span>
             ) : (
               member.name
@@ -164,7 +126,7 @@ function MemberCard({ member }: { member: Member }) {
         </div>
       )}
 
-      {member.bio && <p className="member-bio">{member.bio}</p>}
+      {member.bio && <p className="member-bio member-bio-clamp">{member.bio}</p>}
     </article>
   );
 }

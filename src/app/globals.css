@@ -403,25 +403,12 @@ a:hover {
   width: 100%;
   text-align: left;
   line-height: 1.25;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .member-link:hover {
   color: var(--primary);
   text-decoration: none;
-}
-
-.member-link-ellipsis {
-  flex-shrink: 0;
-  color: var(--primary);
-  text-decoration: none;
-  line-height: 1.25;
-}
-
-.member-link-ellipsis:hover {
-  text-decoration: underline;
 }
 
 .member-card {
@@ -784,4 +771,11 @@ a:hover {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.member-bio-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
 }
