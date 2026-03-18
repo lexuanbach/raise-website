@@ -23,11 +23,16 @@ type Publication = {
 export default async function PublicationsPage() {
   const pubs = await client.fetch<Publication[]>(publicationsQuery);
   const sortedPubs = [...pubs].sort((left, right) => (right.year ?? 0) - (left.year ?? 0));
+  const currentYear = new Date().getFullYear();
+  const oldestStandaloneYear = currentYear - 4;
   const publicationsByYear = sortedPubs.reduce<Record<string, Publication[]>>((groups, publication) => {
     let yearKey = "Other";
 
     if (publication.year) {
-      yearKey = publication.year >= 2023 ? publication.year.toString() : "Before 2023";
+      yearKey =
+        publication.year >= oldestStandaloneYear
+          ? publication.year.toString()
+          : `Before ${oldestStandaloneYear}`;
     }
 
     if (!groups[yearKey]) {
@@ -47,11 +52,11 @@ export default async function PublicationsPage() {
       return -1;
     }
 
-    if (leftYear === "Before 2023") {
+    if (leftYear === `Before ${oldestStandaloneYear}`) {
       return rightYear === "Other" ? -1 : 1;
     }
 
-    if (rightYear === "Before 2023") {
+    if (rightYear === `Before ${oldestStandaloneYear}`) {
       return leftYear === "Other" ? 1 : -1;
     }
 
