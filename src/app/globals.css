@@ -441,6 +441,7 @@ a:hover {
   background: #e8f7f1;
   border-color: #b7e3d0;
   color: #0f5c54;
+  border-radius: 10px;
 }
 
 .homepage-news-item-publications {
@@ -457,6 +458,7 @@ a:hover {
   background: #fff4e5;
   border-color: #f7d8a8;
   color: #9a3412;
+  border-radius: 10px;
 }
 
 @media (max-width: 900px) {
