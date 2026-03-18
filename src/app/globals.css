@@ -440,7 +440,7 @@ a:hover {
   background: #eef2ff;
   border-color: #c7d2fe;
   color: #3730a3;
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .homepage-news-item-news {
@@ -710,6 +710,30 @@ a:hover {
 .article-lead a:hover,
 .info-card a:hover {
   text-decoration: underline;
+}
+
+.info-card .publication-link-primary {
+  background: #2563eb;
+  border: 1px solid #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.info-card .publication-link-primary:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.info-card .publication-link-secondary {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.info-card .publication-link-secondary:hover {
+  color: var(--text);
+  text-decoration: none;
 }
 
 .tag-row{
