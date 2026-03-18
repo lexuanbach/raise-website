@@ -787,6 +787,13 @@ a:hover {
   margin: 0;
 }
 
+.member-bio-text-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+
 .member-bio-footer {
   display: flex;
   justify-content: flex-end;
