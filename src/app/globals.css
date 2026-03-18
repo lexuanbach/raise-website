@@ -298,6 +298,12 @@ a:hover {
   color: #ffffff;
 }
 
+.publication-link-primary:visited,
+.publication-link-primary:hover,
+.publication-link-primary:active {
+  color: #ffffff;
+}
+
 .publication-link-secondary {
   background: var(--surface-soft);
   border: 1px solid var(--line);
