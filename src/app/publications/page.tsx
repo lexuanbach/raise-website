@@ -22,6 +22,7 @@ type Publication = {
 
 export default async function PublicationsPage() {
   const pubs = await client.fetch<Publication[]>(publicationsQuery);
+  const sortedPubs = [...pubs].sort((left, right) => (right.year ?? 0) - (left.year ?? 0));
 
   return (
     <main className="section">
@@ -32,12 +33,12 @@ export default async function PublicationsPage() {
           Papers, preprints, and research artifacts from the RAISE group.
         </p>
 
-        <div className="card-grid">
-          {pubs.map((p) => {
+        <div className="publication-list">
+          {sortedPubs.map((p) => {
             const authors = p.authors ?? [];
 
             return (
-              <article className="info-card" key={p._id}>
+              <article className="info-card publication-list-item" key={p._id}>
                 <h3>
                   {p.slug ? (
                     <Link href={`/publications/${p.slug}`}>{p.title}</Link>

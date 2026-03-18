@@ -278,6 +278,16 @@ a:hover {
   flex-wrap: wrap;
 }
 
+.publication-list {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.publication-list-item {
+  width: 100%;
+}
+
 @media (max-width: 900px) {
   .hero-grid,
   .card-grid {
@@ -331,6 +341,7 @@ a:hover {
 .member-link {
   display: inline-flex;
   align-items: center;
+  width: 12rem;
   max-width: 12rem;
   min-height: 2.4rem;
   padding: 0.45rem 0.8rem;
@@ -339,6 +350,12 @@ a:hover {
   background: var(--surface-soft);
   color: var(--text);
   text-decoration: none;
+  min-width: 0;
+}
+
+.member-link-text {
+  display: block;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

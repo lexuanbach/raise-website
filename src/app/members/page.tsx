@@ -72,7 +72,7 @@ function MemberCard({ member }: { member: Member }) {
           <h3>
             {member.slug ? (
               <Link href={`/members/${member.slug}`} className="member-link">
-                {member.name}
+                <span className="member-link-text">{member.name}</span>
               </Link>
             ) : (
               member.name
