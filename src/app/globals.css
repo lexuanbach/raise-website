@@ -401,7 +401,7 @@ a:hover {
 .member-link-text {
   display: block;
   width: 100%;
-  text-align: left;
+  text-align: center;
   line-height: 1.25;
   white-space: nowrap;
 }
@@ -740,7 +740,9 @@ a:hover {
 .member-links a{
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   max-width: min(100%, 9rem);
+  min-height: 2.75rem;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
