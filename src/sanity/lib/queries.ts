@@ -7,6 +7,15 @@ export const membersQuery = groq`
   role,
   bio,
   photo,
+  email,
+  phone,
+  office,
+  googleScholar,
+  dblp,
+  orcid,
+  github,
+  website,
+  linkedin,
   "slug": slug.current
 }
 `
