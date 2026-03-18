@@ -377,11 +377,11 @@ a:hover {
 .member-link-shell {
   display: inline-flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   width: 12rem;
   max-width: 12rem;
   min-height: 2.4rem;
-  padding: 0.3rem 0.8rem 0.6rem;
+  padding: 0.1rem 0.8rem 0.8rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--surface-soft);
@@ -401,14 +401,11 @@ a:hover {
 .member-link-text {
   display: block;
   width: 100%;
-  text-align: center;
+  text-align: left;
   line-height: 1.25;
   overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.member-link-shell-truncated .member-link-text {
-  text-align: right;
 }
 
 .member-link:hover {
@@ -440,6 +437,7 @@ a:hover {
 .member-card-main {
   display: flex;
   gap: 1rem;
+  align-items: flex-start;
 }
 
 .member-card-row {
