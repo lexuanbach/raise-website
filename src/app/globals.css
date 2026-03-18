@@ -71,7 +71,7 @@ a:hover {
 }
 
 .brand-mark {
-  font-size: 1rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
   font-weight: 800;
   letter-spacing: 0.08em;
 }
