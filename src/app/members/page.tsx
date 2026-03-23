@@ -37,7 +37,17 @@ const ROLE_SECTIONS = [
     key: "Collaborators",
     title: "Collaborators",
   },
+  {
+    key: "Past Members",
+    title: "Past Members",
+  },
 ] as const;
+
+const CORE_MEMBER_ROLE_ORDER: Record<string, number> = {
+  "lab-head": 0,
+  "lab-vice-head": 1,
+  "core-member": 2,
+};
 
 const ROLE_SECTION_ORDER = ROLE_SECTIONS.reduce<Record<string, number>>(
   (order, section, index) => {
@@ -142,8 +152,9 @@ export default async function MembersPage() {
     }
 
     if (leftSection === "Core Members") {
-      const leftPriority = left.role === "lab-head" ? 0 : 1;
-      const rightPriority = right.role === "lab-head" ? 0 : 1;
+      const leftPriority = CORE_MEMBER_ROLE_ORDER[left.role ?? ""] ?? Number.MAX_SAFE_INTEGER;
+      const rightPriority =
+        CORE_MEMBER_ROLE_ORDER[right.role ?? ""] ?? Number.MAX_SAFE_INTEGER;
 
       if (leftPriority !== rightPriority) {
         return leftPriority - rightPriority;

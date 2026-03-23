@@ -5,6 +5,11 @@ export const ROLE_OPTIONS = [
     section: "Core Members",
   },
   {
+    value: "lab-vice-head",
+    title: "Lab Vice Head",
+    section: "Core Members",
+  },
+  {
     value: "core-member",
     title: "Core Member",
     section: "Core Members",
@@ -18,6 +23,11 @@ export const ROLE_OPTIONS = [
     value: "collaborator",
     title: "Collaborator",
     section: "Collaborators",
+  },
+  {
+    value: "past-member",
+    title: "Past Member",
+    section: "Past Members",
   },
 ] as const;
 
