@@ -26,10 +26,6 @@ type Member = {
 
 const ROLE_SECTIONS = [
   {
-    key: "Lab Head",
-    title: "Lab Head",
-  },
-  {
     key: "Core Members",
     title: "Core Members",
   },
@@ -143,6 +139,15 @@ export default async function MembersPage() {
 
     if (leftSection !== rightSection) {
       return ROLE_SECTION_ORDER[leftSection] - ROLE_SECTION_ORDER[rightSection];
+    }
+
+    if (leftSection === "Core Members") {
+      const leftPriority = left.role === "lab-head" ? 0 : 1;
+      const rightPriority = right.role === "lab-head" ? 0 : 1;
+
+      if (leftPriority !== rightPriority) {
+        return leftPriority - rightPriority;
+      }
     }
 
     return left.name.localeCompare(right.name);

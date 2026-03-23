@@ -2,7 +2,7 @@ export const ROLE_OPTIONS = [
   {
     value: "lab-head",
     title: "Lab Head",
-    section: "Lab Head",
+    section: "Core Members",
   },
   {
     value: "core-member",
