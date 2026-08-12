@@ -10,6 +10,8 @@ type MemberPublication = {
   _id: string;
   title: string;
   venue?: string;
+  location?: string;
+  keywords?: string[];
   year?: number;
   paperUrl?: string;
   codeUrl?: string;
@@ -175,10 +177,11 @@ export default async function MemberPage({
                     )}
                   </h3>
 
-                  {(pub.venue || pub.year) && (
+                  {(pub.venue || pub.location || pub.year) && (
                     <p className="publication-meta">
                       <span className="publication-venue">
                         {pub.venue || "Publication"}
+                        {pub.location ? `, ${pub.location}` : ""}
                         {pub.year ? ` (${pub.year})` : ""}
                       </span>
                     </p>

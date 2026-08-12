@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist } from "next/font/google";
+import { CONTACT_EMAIL } from "./contact";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -48,7 +49,7 @@ export default function RootLayout({
               <strong>RAISE Research Group</strong>
               <p>Reasoning in Artificial Intelligence and Software Engineering</p>
               <div className="footer-contact-tabs">
-                <Link href="/" className="footer-tab">Email</Link>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="footer-tab">Email</a>
                 <Link href="/" className="footer-tab">Facebook</Link>
                 <Link href="/" className="footer-tab">X</Link>
                 <Link href="/" className="footer-tab">Zalo</Link>

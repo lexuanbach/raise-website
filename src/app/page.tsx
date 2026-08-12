@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { eventsQuery, newsQuery, publicationsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
+import { CONTACT_EMAIL } from "./contact";
 
 export const revalidate = 60;
 
@@ -74,9 +75,9 @@ export default async function HomePage() {
               <Link href="/" className="footer-tab">
                 Facebook
               </Link>
-              <Link href="/" className="footer-tab">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="footer-tab">
                 Email Contact
-              </Link>
+              </a>
               <Link href="/" className="footer-tab">
                 Zalo
               </Link>
@@ -170,6 +171,28 @@ export default async function HomePage() {
               )}
               <Link href="/news">View news</Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <p className="section-label">Join Us</p>
+          <h2 className="section-title">Work with RAISE</h2>
+          <p className="section-text">
+            We are looking for talented and self-motivated students who want to do
+            high-quality research with us, and we are always happy to collaborate
+            with fellow researchers and industry partners. If that sounds like you,
+            just drop us an email.
+          </p>
+
+          <div className="hero-actions">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="primary-button">
+              Email Us
+            </a>
+            <Link href="/research" className="secondary-link">
+              See our research
+            </Link>
           </div>
         </div>
       </section>
