@@ -13,6 +13,8 @@ type PublicationDetail = {
   title: string;
   authors?: PublicationAuthor[];
   venue?: string;
+  location?: string;
+  keywords?: string[];
   year?: number;
   abstract?: string;
   paperUrl?: string;
@@ -76,6 +78,13 @@ export default async function PublicationDetailPage({
               {pub.venue ? <span className="publication-venue">{pub.venue}</span> : "—"}
             </div>
 
+            {pub.location && (
+              <>
+                <div className="metadata-label">Location</div>
+                <div className="metadata-value">{pub.location}</div>
+              </>
+            )}
+
             <div className="metadata-label">Year</div>
             <div className="metadata-value">
               {pub.year ? <span className="publication-year">({pub.year})</span> : "—"}
@@ -95,6 +104,16 @@ export default async function PublicationDetailPage({
             )}
           </div>
         </section>
+
+        {(pub.keywords ?? []).length > 0 && (
+          <div className="tag-row">
+            {(pub.keywords ?? []).map((keyword, index) => (
+              <span key={index} className="tag">
+                {keyword}
+              </span>
+            ))}
+          </div>
+        )}
 
         {pub.abstract && (
           <section className="article-body" style={{ marginTop: "1.5rem" }}>

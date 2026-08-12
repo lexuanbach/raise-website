@@ -14,6 +14,8 @@ type Publication = {
   title: string;
   authors?: PublicationAuthor[];
   venue?: string;
+  location?: string;
+  keywords?: string[];
   year?: number;
   paperUrl?: string;
   codeUrl?: string;
@@ -107,13 +109,24 @@ export default async function PublicationsPage() {
                         </p>
                       )}
 
-                      {(p.venue || p.year) && (
+                      {(p.venue || p.location || p.year) && (
                         <p className="publication-meta">
                           <span className="publication-venue">
                             {p.venue || "Publication"}
+                            {p.location ? `, ${p.location}` : ""}
                             {p.year ? ` (${p.year})` : ""}
                           </span>
                         </p>
+                      )}
+
+                      {(p.keywords ?? []).length > 0 && (
+                        <div className="tag-row">
+                          {(p.keywords ?? []).map((keyword, index) => (
+                            <span key={index} className="tag">
+                              {keyword}
+                            </span>
+                          ))}
+                        </div>
                       )}
 
                       {(p.paperUrl || p.codeUrl) && (

@@ -55,7 +55,7 @@ export const researchQuery = groq`
 `
 
 export const publicationsQuery = groq`
-*[_type == "publication"] | order(year desc){
+*[_type == "publication"] | order(year desc, _createdAt desc){
   _id,
   title,
   authors[]{
@@ -70,6 +70,8 @@ export const publicationsQuery = groq`
     }
   },
   venue,
+  location,
+  keywords,
   year,
   paperUrl,
   codeUrl,
@@ -94,10 +96,12 @@ export const memberBySlugQuery = groq`
   bio,
   photo,
 
-  "publications": *[_type == "publication" && references(^._id)] | order(year desc){
+  "publications": *[_type == "publication" && references(^._id)] | order(year desc, _createdAt desc){
     _id,
     title,
     venue,
+    location,
+    keywords,
     year,
     paperUrl,
     codeUrl,
@@ -135,6 +139,8 @@ export const publicationBySlugQuery = groq`
     }
   },
   venue,
+  location,
+  keywords,
   year,
   abstract,
   paperUrl,
